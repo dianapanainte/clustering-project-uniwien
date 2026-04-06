@@ -7,6 +7,16 @@ import pandas as pd
 class IQRSelection(OutlierStrategy):
     def handle(self, df):
         return df.clip(lower=df.quantile(0.05), upper=df.quantile(0.95), axis=1)
+    # TODO - Discuss what exactly are the percentages for outliers. 
+
+class IQRMeanConsumption(OutlierStrategy):
+    def handle(self, df):
+        Q1 = df.quantile(0.25)
+        Q3 = df.quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        return df.apply(lambda x: np.where((x < lower_bound[x.name]) | (x > upper_bound[x.name]), x.mean(), x))
 
 class ZScoreSelection(OutlierStrategy):
     def handle(self, df):
@@ -22,6 +32,10 @@ class NoOutlierHandling(OutlierStrategy):
 class MeanImputation(ZeroValueStrategy):
     def handle(self, df):
         return df.replace(0, df.mean())
+    
+class LogImputation(ZeroValueStrategy):
+    def handle(self, df):
+        return df.replace(0, np.log1p(df[df > 0].mean()))
     
 class NoImputation(ZeroValueStrategy):
     def handle(self, df):
