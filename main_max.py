@@ -12,8 +12,6 @@ from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_har
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from datetime import datetime
-from clustering_module.clustering import HierarchicalClustering, KMeansClustering
-from clustering_module.preprocessing import IQRMeanConsumption, IQRSelection, LogImputation, MeanImputation, MinMaxScaling, NoImputation, NoOutlierHandling, NoScaling, StandardScaling
 
 CSV_FILE = 'sample_23.csv'
 
