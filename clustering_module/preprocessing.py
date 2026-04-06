@@ -43,3 +43,36 @@ class MinMaxScaling(NormalizationStrategy):
 class NoScaling(NormalizationStrategy):
     def transform(self, df):
         return df
+    
+# Custom Implementations
+class RollingOutlierHandling(OutlierStrategy):
+    def __init__(self, k=3, window=7):
+        self.k = k
+        self.window = window
+
+    def handle(self, df: pd.DataFrame) -> pd.DataFrame:
+        df = df.dropna(how='all')
+        df_t = df.T
+        r_mean = df_t.rolling(window=self.window, center=True).mean()
+        r_std = df_t.rolling(window=self.window, center=True).std()
+        df_clean_t = df_t.clip(lower=r_mean - (self.k * r_std),
+                                upper=r_mean + (self.k * r_std))
+        df_clean_t = df_clean_t.ffill().bfill().fillna(0)
+        return df_clean_t.T
+
+
+class ShapeScaling(NormalizationStrategy):
+    def transform(self, df: pd.DataFrame) -> pd.DataFrame:
+        scaled = df.sub(df.mean(axis=1), axis=0).div(df.std(axis=1), axis=0)
+        return scaled.fillna(0)  # households with zero variance become 0
+
+
+class HybridScaling(NormalizationStrategy):
+    def __init__(self, alpha=0.5):
+        self.alpha = alpha
+
+    def transform(self, df: pd.DataFrame) -> pd.DataFrame:
+        mins = df.min(axis=1)
+        maxs = df.max(axis=1)
+        shape_only = df.sub(mins, axis=0).div(maxs - mins, axis=0)
+        return (shape_only * (1 - self.alpha)) + (df * self.alpha)

@@ -4,6 +4,12 @@ import numpy as np
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
+# --- 0. Feature Extraction Interface ---
+class FeatureStrategy(ABC):
+    @abstractmethod
+    def extract(self, df: pd.DataFrame) -> pd.DataFrame:
+        pass
+
 # --- 1. Outlier Management Interface ---
 class OutlierStrategy(ABC):
     @abstractmethod
