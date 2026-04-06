@@ -4,7 +4,7 @@ import numpy as np
 
 from clustering_module.pipeline import ClusteringPipeline
 from clustering_module.clustering import HierarchicalClustering, KMeansClustering
-from clustering_module.preprocessing import IQRSelection, MeanImputation, MinMaxScaling, NoImputation, NoOutlierHandling, NoScaling, StandardScaling
+from clustering_module.preprocessing import IQRMeanConsumption, IQRSelection, LogImputation, MeanImputation, MinMaxScaling, NoImputation, NoOutlierHandling, NoScaling, StandardScaling
 
 CSV_FILE = 'sample_23.csv'
 
@@ -16,10 +16,10 @@ data = load_data(CSV_FILE)
 
 # Experiment 1: Mean Imputation + IQR + Standard Scaler + KMeans
 pipeline_1 = ClusteringPipeline(
-    zero_strategy=NoImputation(),
-    outlier_strategy=NoOutlierHandling(),
-    norm_strategy=NoScaling(),
-    cluster_strategy=KMeansClustering(n_clusters=2)
+    zero_strategy=LogImputation(),
+    outlier_strategy=IQRMeanConsumption(),
+    norm_strategy=MinMaxScaling(),
+    cluster_strategy=KMeansClustering(n_clusters=3)
 )
 
 results = pipeline_1.run(data)
