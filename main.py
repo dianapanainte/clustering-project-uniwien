@@ -211,7 +211,7 @@ with open(report_path, 'w') as f:
     f.write(f"**Features:** {', '.join(features.columns)}\n\n")
 
     f.write(f"## Clustering Results\n\n")
-    f.write(f"| Method | Clusters | Noise | Silhouette ↑ | Davies-Bouldin ↓ | Calinski-Harabasz ↑ |\n")
+    f.write(f"| Method | Clusters | Noise | Silhouette | Davies-Bouldin | Calinski-Harabasz |\n")
     f.write(f"|--------|----------|-------|--------------|------------------|---------------------|\n")
     for name, r in cached_results.items():
         f.write(f"| {name} | {r['n_clusters']} | {r['n_noise']} | {r['silhouette']:.4f} | {r['davies_bouldin']:.4f} | {r['calinski_harabasz']:.4f} |\n")
