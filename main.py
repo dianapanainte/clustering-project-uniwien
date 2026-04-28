@@ -30,17 +30,17 @@ filenames = []
 
 for cluster_id in results['cluster'].unique():
     cluster_data = results[results['cluster'] == cluster_id]
-    cluster_data.to_csv(f"cluster_{cluster_id}.csv", index=False)
-    forecasting_model.fit(f"cluster_{cluster_id}.csv")
-    forecasting_model.predict(csv_path=f"forecast_24_cluster_{cluster_id}.csv")
-    filenames.append(f"forecast_24_cluster_{cluster_id}.csv")
+    cluster_data.to_csv(f"results_forecasting/cluster_{cluster_id}.csv", index=False)
+    forecasting_model.fit(f"results_forecasting/cluster_{cluster_id}.csv")
+    forecasting_model.predict(csv_path=f"results_forecasting/forecast_24_cluster_{cluster_id}.csv")
+    filenames.append(f"results_forecasting/forecast_24_cluster_{cluster_id}.csv")
 
 dfs = [pd.read_csv(f, index_col='ID') for f in filenames]
 combined = pd.concat(dfs)
-combined.to_csv('forecast_24.csv', index=True)
+combined.to_csv('results_forecasting/forecast_24.csv', index=True)
 print(f'Prediction written in "forecast_24.csv"')
 
-mae_value, mean_actual = calculate_mae('forecast_24.csv', './data/sample_24.csv')
+mae_value, mean_actual = calculate_mae('results_forecasting/forecast_24.csv', './data/sample_24.csv')
 print(f"Mean = {mean_actual:.4f} kW * h")
 print(f"MAE = {mae_value:.4f} kW * h")
 print(f"Normalized MAE = {mae_value / mean_actual * 100:.2f}%")
