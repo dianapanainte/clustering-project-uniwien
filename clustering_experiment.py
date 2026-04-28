@@ -163,8 +163,8 @@ ax2.plot(k_range, silhouettes, 'ro-')
 ax2.set_xlabel('k')
 ax2.set_title('Silhouette Score — pick the peak')
 plt.tight_layout()
-plt.savefig('elbow_plot.png')
-print("\nElbow plot saved as elbow_plot.png")
+plt.savefig('plots/elbow_plot.png')
+print("\nElbow plot saved as plots/elbow_plot.png")
 
 # --- STEP 4: Cluster Profiles for ALL successful strategies ---
 print("\n--- Cluster Profiles ---")
@@ -192,8 +192,8 @@ for idx, (name, r) in enumerate(cached_results.items()):
     ax.legend()
 
 plt.tight_layout()
-plt.savefig('cluster_profiles.png')
-print("Cluster profiles saved as cluster_profiles.png")
+plt.savefig('plots/cluster_profiles.png')
+print("Cluster profiles saved as plots/cluster_profiles.png")
 
 # --- STEP 5: Write markdown report ---
 report_path = Path('results.md')
@@ -215,10 +215,10 @@ with open(report_path, 'w') as f:
         f.write(f"| {name} | {r['n_clusters']} | {r['n_noise']} | {r['silhouette']:.4f} | {r['davies_bouldin']:.4f} | {r['calinski_harabasz']:.4f} |\n")
 
     f.write(f"\n## Elbow Plot\n")
-    f.write(f"![Elbow Plot](elbow_plot.png)\n\n")
+    f.write(f"![Elbow Plot](plots/elbow_plot.png)\n\n")
 
     f.write(f"## Cluster Profiles (all strategies)\n\n")
-    f.write(f"![Cluster Profiles](cluster_profiles.png)\n\n")
+    f.write(f"![Cluster Profiles](plots/cluster_profiles.png)\n\n")
 
     for name, r in cached_results.items():
         f.write(f"### {name}\n\n")
