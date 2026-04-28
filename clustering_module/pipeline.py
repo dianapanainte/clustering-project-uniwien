@@ -23,7 +23,7 @@ class ClusteringPipeline:
     def run(self, df: pd.DataFrame):
         print("Starting Pipeline...")
         data = df.copy()
-        data = self.feature_strategy.extract(data)
+        data = self.feature_strategy.compute(data)
         data = self.zero_strategy.handle(data)
         data = self.outlier_strategy.handle(data)
         data = self.norm_strategy.transform(data)
