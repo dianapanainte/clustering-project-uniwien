@@ -1,7 +1,7 @@
 # Clustering Experiment Report
-**Date:** 2026-04-06 15:15
+**Date:** 2026-04-28 19:56
 
-**Dataset:** sample_23.csv â€” 17367 households, 365 days
+**Dataset:** sample_23.csv — 17367 households, 365 days
 
 ## Feature Blocks Used
 - VolumeFeatures
@@ -15,7 +15,7 @@
 
 ## Clustering Results
 
-| Method | Clusters | Noise | Silhouette â†‘ | Davies-Bouldin â†“ | Calinski-Harabasz â†‘ |
+| Method | Clusters | Noise | Silhouette | Davies-Bouldin | Calinski-Harabasz |
 |--------|----------|-------|--------------|------------------|---------------------|
 | kmeans_k2 | 2 | 0 | 0.6347 | 0.6412 | 32123.0602 |
 | kmeans_k3 | 3 | 0 | 0.6180 | 0.7755 | 28847.7191 |
@@ -23,11 +23,11 @@
 | kmeans_k5 | 5 | 0 | 0.5617 | 0.8211 | 25354.5139 |
 
 ## Elbow Plot
-![Elbow Plot](elbow_plot.png)
+![Elbow Plot](plots/elbow_plot.png)
 
 ## Cluster Profiles (all strategies)
 
-![Cluster Profiles](cluster_profiles.png)
+![Cluster Profiles](plots/cluster_profiles.png)
 
 ### kmeans_k2
 
@@ -76,19 +76,19 @@
 
 #### two_stage_k3_tight
 
-All 17367 points classified as noise â€” no cluster profiles available.
+All 17367 points classified as noise — no cluster profiles available.
 
 #### two_stage_k3_loose
 
-All 17367 points classified as noise â€” no cluster profiles available.
+All 17367 points classified as noise — no cluster profiles available.
 
 #### two_stage_k4_tight
 
-All 17367 points classified as noise â€” no cluster profiles available.
+All 17367 points classified as noise — no cluster profiles available.
 
 #### two_stage_k4_loose
 
-All 17367 points classified as noise â€” no cluster profiles available.
+All 17367 points classified as noise — no cluster profiles available.
 
 ## Notes
 - 
